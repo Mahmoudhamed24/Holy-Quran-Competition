@@ -1,0 +1,161 @@
+/* تنسيق عام */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Cairo', sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
+  line-height: 1.6;
+  direction: rtl;
+  text-align: center;
+  padding-bottom: 60px; /* لتوفير مساحة للفوتر الثابت */
+}
+
+.main-header {
+  background-color: #024675;
+  color: #fff;
+  padding: 20px;
+}
+
+.main-header h1 {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.main-content {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.form-section {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-section h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  text-align: right;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input, select {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+button {
+  width: 100%;
+  background-color: #024675;
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #013a52;
+}
+
+.result-section {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.result-section p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.donations-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 700px;
+  text-align: right;
+}
+
+.donations-header {
+  background-color: #024675;
+  color: #fff;
+  padding: 15px;
+  border-radius: 10px 10px 0 0;
+  text-align: center;
+}
+
+.donations-header h3 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.donations-content {
+  padding: 20px;
+}
+
+.donations-content p {
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.donations-content strong {
+  color: #024675;
+}
+
+.error {
+  color: #ff3333;
+  font-weight: bold;
+  font-size: 18px;
+  margin: 20px 0;
+}
+
+.main-footer {
+  background-color: #024675;
+  color: #ffffff;
+  text-align: center;
+  padding: 20px;
+  font-size: 16px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .main-footer {
+    font-size: 14px;
+  }
+}

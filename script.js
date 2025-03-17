@@ -25,8 +25,21 @@ async function fetchData() {
 
       if (data.success) {
           const donations = data.data.slice(0);
+// استخراج قيمة النتيجة والتأكد من عدم وجود مسافات زائدة
+let resultText = donations[4].trim();
 
-          resultDiv.innerHTML = `
+// تحديد الفئة المناسبة بناءً على قيمة النتيجة
+let resultClass = '';
+if (resultText === "اجتاز") {
+  resultClass = 'result-pass';
+} else if (resultText === "ضعيف") {
+  resultClass = 'result-weak';
+} else if (resultText === "مقبول") {
+  resultClass = 'result-ok';
+}
+
+// إنشاء المحتوى باستخدام الفئة المحددة
+resultDiv.innerHTML = `
   <div class="donations-card">
     <div class="donations-header">
       <h3>نتيجة المسابقة</h3>
@@ -46,7 +59,7 @@ async function fetchData() {
       </div>
       <div class="donation-item">
         <span class="label">النتيجة:</span>
-        <span class="value">${donations[4]}</span>
+        <span class="value ${resultClass}">${resultText}</span>
       </div>
     </div>
   </div>

@@ -1,196 +1,74 @@
-/* تنسيق عام */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+async function fetchData() {
+  const center = document.getElementById('centerSelect').value;
+  const code = document.getElementById('codeInput').value.trim();
+  const resultDiv = document.getElementById('result');
 
-body {
-  font-family: 'Cairo', sans-serif;
-  background-color: #f4f4f9;
-  color: #333;
-  line-height: 1.6;
-  direction: rtl;
-  text-align: center;
-  padding-bottom: 60px; /* لتوفير مساحة للفوتر الثابت */
-}
-
-.main-header {
-  background-color: #024675;
-  color: #fff;
-  padding: 20px;
-}
-
-.main-header h1 {
-  font-size: 26px;
-  font-weight: 700;
-}
-
-.main-content {
-  padding: 20px;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.form-section {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.form-section h2 {
-  font-size: 22px;
-  font-weight: 600;
-  margin-bottom: 15px;
-}
-
-.form-group {
-  margin-bottom: 15px;
-  text-align: right;
-}
-
-label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-input, select {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-bottom: 10px;
-}
-
-button {
-  width: 100%;
-  background-color: #024675;
-  color: #fff;
-  padding: 12px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #013a52;
-}
-
-.result-section {
-  margin-top: 20px;
-  padding: 20px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.result-section p {
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-.donations-card {
-  background: linear-gradient(135deg, #ffffff, #f0f4f8);
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
-  margin: 20px auto;
-  overflow: hidden;
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-.donations-header {
-  background-color: #024675;
-  color: #fff;
-  padding: 15px;
-  text-align: center;
-}
-
-.donations-header h3 {
-  margin: 0;
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.donations-content {
-  padding: 20px;
-}
-
-.donation-item {
-  margin-bottom: 15px;
-  font-size: 18px;
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 8px;
-}
-
-.donation-item:last-child {
-  border-bottom: none;
-}
-
-.label {
-  font-weight: bold;
-  color: #024675;
-}
-
-.value {
-  color: #333;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
+  // التحقق من المدخلات
+  if (!center) {
+      resultDiv.innerHTML = '<p class="error">يرجى اختيار عدد الأجزاء.</p>';
+      return;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  if (!code) {
+      resultDiv.innerHTML = '<p class="error">يرجى إدخال الكود.</p>';
+      return;
   }
+
+  resultDiv.textContent = "جاري التحقق...";
+
+  try {
+      const apiUrl = `https://script.google.com/macros/s/AKfycbzCLzorQ2_T-Wpj-aBoJmq-nk2bq5j8H4eYyUdVlCR8rXqF4yGovvgCGnK47V96psJ0Qw/exec?center=${encodeURIComponent(center)}&code=${encodeURIComponent(code)}`;
+      console.log('API URL:', apiUrl);
+
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+
+      if (data.success) {
+          const donations = data.data.slice(0);
+// استخراج قيمة النتيجة والتأكد من عدم وجود مسافات زائدة
+let resultText = donations[4].trim();
+
+// تحديد الفئة المناسبة بناءً على قيمة النتيجة
+let resultClass = '';
+if (resultText === "اجتاز") {
+  resultClass = 'result-pass';
+} else if (resultText === "ضعيف") {
+  resultClass = 'result-weak';
+} else if (resultText === "مقبول") {
+  resultClass = 'result-ok';
 }
 
-/* تكييف التصميم مع الشاشات الصغيرة */
-@media (max-width: 480px) {
-  .donation-item {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .donation-item span {
-    margin-bottom: 5px;
-  }
-}
+// إنشاء المحتوى باستخدام الفئة المحددة
+resultDiv.innerHTML = `
+  <div class="donations-card">
+    <div class="donations-header">
+      <h3>نتيجة المسابقة</h3>
+    </div>
+    <div class="donations-content">
+      <div class="donation-item">
+        <span class="label">الاسم:</span>
+        <span class="value">${donations[1]}</span>
+      </div>
+      <div class="donation-item">
+        <span class="label">عدد الأجزاء:</span>
+        <span class="value">${donations[2]}</span>
+      </div>
+      <div class="donation-item">
+        <span class="label">الترتيب:</span>
+        <span class="value">${donations[3]}</span>
+      </div>
+      <div class="donation-item">
+        <span class="label">النتيجة:</span>
+        <span class="value ${resultClass}">${resultText}</span>
+      </div>
+    </div>
+  </div>
+`;
 
-
-.error {
-  color: #ff3333;
-  font-weight: bold;
-  font-size: 18px;
-  margin: 20px 0;
-}
-
-.main-footer {
-  background-color: #024675;
-  color: #ffffff;
-  text-align: center;
-  padding: 5px;
-  font-size: 16px;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-}
-
-@media (max-width: 768px) {
-  .main-footer {
-    font-size: 14px;
+      } else {
+          resultDiv.innerHTML = '<p class="error">الكود غير موجود. يرجى المحاولة مرة أخرى.</p>';
+      }
+  } catch (error) {
+      resultDiv.innerHTML = '<p class="error">حدث خطأ أثناء جلب البيانات. يرجى المحاولة لاحقاً.</p>';
   }
 }

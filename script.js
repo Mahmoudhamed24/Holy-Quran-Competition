@@ -27,18 +27,31 @@ async function fetchData() {
           const donations = data.data.slice(0);
 
           resultDiv.innerHTML = `
-              <div class="donations-card">
-                  <div class="donations-header">
-                      <h3>نتيجة المسابقة</h3>
-                  </div>
-                  <div class="donations-content">
-                      <p><strong>الاسم:</strong> ${donations[1]}</p>
-                      <p><strong>عدد الاجزاء :</strong> ${donations[2]}</p>
-                      <p><strong>الترتيب :</strong> ${donations[3]}</p>
-                      <p><strong>النتيجة:</strong> ${donations[4]}</p>
-                  </div>
-              </div>
-          `;
+  <div class="donations-card">
+    <div class="donations-header">
+      <h3>نتيجة المسابقة</h3>
+    </div>
+    <div class="donations-content">
+      <div class="donation-item">
+        <span class="label">الاسم:</span>
+        <span class="value">${donations[1]}</span>
+      </div>
+      <div class="donation-item">
+        <span class="label">عدد الأجزاء:</span>
+        <span class="value">${donations[2]}</span>
+      </div>
+      <div class="donation-item">
+        <span class="label">الترتيب:</span>
+        <span class="value">${donations[3]}</span>
+      </div>
+      <div class="donation-item">
+        <span class="label">النتيجة:</span>
+        <span class="value">${donations[4]}</span>
+      </div>
+    </div>
+  </div>
+`;
+
       } else {
           resultDiv.innerHTML = '<p class="error">الكود غير موجود. يرجى المحاولة مرة أخرى.</p>';
       }

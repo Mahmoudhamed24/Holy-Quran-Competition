@@ -98,21 +98,20 @@ button:hover {
 }
 
 .donations-card {
-  background-color: #fff;
+  background: linear-gradient(135deg, #ffffff, #f0f4f8);
   border: 1px solid #ddd;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
   margin: 20px auto;
-  padding: 20px;
-  max-width: 700px;
-  text-align: right;
+  overflow: hidden;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
 .donations-header {
   background-color: #024675;
   color: #fff;
   padding: 15px;
-  border-radius: 10px 10px 0 0;
   text-align: center;
 }
 
@@ -126,14 +125,50 @@ button:hover {
   padding: 20px;
 }
 
-.donations-content p {
+.donation-item {
   margin-bottom: 15px;
   font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
 }
 
-.donations-content strong {
+.donation-item:last-child {
+  border-bottom: none;
+}
+
+.label {
+  font-weight: bold;
   color: #024675;
 }
+
+.value {
+  color: #333;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* تكييف التصميم مع الشاشات الصغيرة */
+@media (max-width: 480px) {
+  .donation-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .donation-item span {
+    margin-bottom: 5px;
+  }
+}
+
 
 .error {
   color: #ff3333;
@@ -146,7 +181,7 @@ button:hover {
   background-color: #024675;
   color: #ffffff;
   text-align: center;
-  padding: 10px;
+  padding: 5px;
   font-size: 16px;
   position: fixed;
   bottom: 0;

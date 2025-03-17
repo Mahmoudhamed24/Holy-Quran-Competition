@@ -42,7 +42,7 @@ if (resultText === "اجتاز") {
 resultDiv.innerHTML = `
   <div class="donations-card">
     <div class="donations-header">
-      <h3>نتيجة المسابقة</h3>
+      <h3>نتيجة مسابقة بالقران نحيا</h3>
     </div>
     <div class="donations-content">
       <div class="donation-item">

@@ -17,7 +17,7 @@ async function fetchData() {
   resultDiv.textContent = "جاري التحقق...";
 
   try {
-      const apiUrl = `https://script.google.com/macros/s/AKfycbzCLzorQ2_T-Wpj-aBoJmq-nk2bq5j8H4eYyUdVlCR8rXqF4yGovvgCGnK47V96psJ0Qw/exec?center=${encodeURIComponent(center)}&code=${encodeURIComponent(code)}`;
+      const apiUrl = `https://script.google.com/macros/s/AKfycbw1cilCgCmQIO6G21ITpaovAegbPYU4BOWs5X7A7lHRuHL8Aa8nsfDOEDZyQ6eRa6taxw/exec?center=${encodeURIComponent(center)}&code=${encodeURIComponent(code)}`;
       console.log('API URL:', apiUrl);
 
       const response = await fetch(apiUrl);
